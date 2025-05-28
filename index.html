@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart finance tracking app for small traders">
+    <meta name="author" content="TraderTrack">
+    <title>TraderTrack - Smart Finance Tracker</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Supabase SDK -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">💰 SalesTrack</div>
+            <div class="tagline">Smart Finance Tracking for Traders</div>
+        </header>
+        
+        <!-- Statistics Cards -->
+        <section class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-value income" id="totalIncome">Kes 0</div>
+                <div class="stat-label">Total Income</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value expense" id="totalExpense">Kes 0</div>
+                <div class="stat-label">Total Expenses</div>
+            </div>
+        </section>
+        
+        <!-- Input Section -->
+        <section class="input-section">
+            <!-- Input Method Selection -->
+            <div class="input-methods">
+                <div class="input-method" id="manualBtn">
+                    <span class="method-icon">✏️</span>
+                    <div class="method-label">Manual</div>
+                </div>
+                <div class="input-method" id="voiceBtn">
+                    <span class="method-icon">🎤</span>
+                    <div class="method-label">Voice</div>
+                </div>
+                <div class="input-method" id="photoBtn">
+                    <span class="method-icon">📷</span>
+                    <div class="method-label">Photo</div>
+                </div>
+            </div>
+            
+            <!-- Transaction Form -->
+            <form id="transactionForm">
+                <div class="type-selector">
+                    <div class="type-btn active" data-type="income">💰 Income</div>
+                    <div class="type-btn" data-type="expense">💸 Expense</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Amount (Kes)</label>
+                    <input type="number" id="amount" class="form-control" placeholder="0.00" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" class="form-control" placeholder="What was this for?" required>
+                </div>
+                
+                <button type="submit" class="add-btn">
+                    <span>Add Transaction</span>
+                </button>
+            </form>
+        </section>
+        
+        <!-- Transactions List -->
+        <section class="transactions" id="transactionsList">
+            <div class="empty-state">
+                <div class="empty-icon">📊</div>
+                <div>No transactions yet</div>
+                <div class="empty-state-message">Add your first income or expense above</div>
+            </div>
+        </section>
+        
+        <!-- Floating Profit Indicator -->
+        <div class="floating-profit">
+            <div>Net Profit: <span id="netProfit">Kes 0.00</span></div>
+        </div>
+    </div>
+    
+    <!-- Voice Input Modal -->
+    <div class="voice-input" id="voiceModal">
+        <div class="voice-modal">
+            <div class="voice-icon">🎤</div>
+            <h3>Listening...</h3>
+            <p>Say something like: "Income Kes 500 from sale" or "Expense Kes 200 for supplies"</p>
+            <button onclick="stopVoiceInput()" class="voice-stop-btn">Stop</button>
+        </div>
+    </div>
+    
+    <!-- Camera Input -->
+    <label for="cameraInput" title="Upload an image using your camera">Upload Image:</label>
+    <input type="file" id="cameraInput" class="camera-input" accept="image/*">
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- JavaScript -->
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>
